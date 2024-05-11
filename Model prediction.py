@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Load the trained model
 model = load_model("E:\\5th semester\\Image Processing\\Assignment_03\\model.h5")
@@ -22,24 +21,6 @@ input_image = preprocess_image(input_image_path)
 # Make predictions using the loaded model
 predictions = model.predict(input_image)
 
-# Get the predicted class label and corresponding class name
+# Get the predicted class label
 predicted_class = np.argmax(predictions)
-class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
-predicted_class_name = class_names[predicted_class]
-
-# Load and plot the input image
-input_img = image.load_img(input_image_path)
-plt.subplot(1, 2, 1)
-plt.imshow(input_img)
-plt.title('Input Image')
-plt.axis('off')
-
-# Plot the predicted class label
-plt.subplot(1, 2, 2)
-plt.barh(class_names, predictions.reshape(-1))
-plt.xlabel('Probability')
-plt.title('Predicted Class: ' + predicted_class_name)
-plt.tight_layout()
-
-# Show the plot
-plt.show()
+print("Predicted Class:", predicted_class)
